@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  <script src="./js/sigma.js"></script>
+
+ 
+</head>
+<body >
+	<button class="btn" id="stop-layout">Stop Layout</button>
+	
+  <div class="container">
+    <div class="row">
+  
+  <div class="span12 sigma-parent" id="sigma-example-parent">
+    <div class="sigma-expand" id="sigma-example"></div>
+  </div>
+</div>
+
+
+
+<script src="./js/sigma.parseGexf.js"></script>
+
+<script type="text/javascript">function init() {
+  // Instanciate sigma.js and customize rendering :
+  var sigInst = sigma.init(document.getElementById('sigma-example')).drawingProperties({
+	defaultLabelColor: '#fff',
+	defaultLabelSize: 14,
+	defaultLabelBGColor: '#fff',
+	defaultLabelHoverColor: '#000',
+	labelThreshold: 6,
+	defaultEdgeType: 'curve',
+	defaultEdgeArrow: 'target'
+  }).graphProperties({
+    minNodeSize: 1,
+    maxNodeSize: 20,
+    minEdgeSize: 2,
+    maxEdgeSize: 2,
+    sideMargin: 50
+  }).mouseProperties({
+    maxRatio: 32
+  });
+
+  // Parse a GEXF encoded file to fill the graph
+  // (requires "sigma.parseGexf.js" to be included)
+  sigInst.parseGexf('./data/city2city_processed.gexf');
+  
+  // Draw the graph :
+  sigInst.draw();
+
+  
+  
+}
+
+if (document.addEventListener) {
+  document.addEventListener("DOMContentLoaded", init, false);
+} else {
+  window.onload = init;
+}
+</script>
+
+<style type="text/css">
+  /* sigma.js context : */
+  .sigma-parent {
+    position: relative;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background: #222;
+    height: 1000px;
+  }
+  .sigma-expand {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .buttons-container{
+    padding-bottom: 8px;
+    padding-top: 12px;
+  }
+</style>
+
+
+    <hr>
+
+
+
+  </div>
+</body>
+</html>
